@@ -204,7 +204,7 @@ function App() {
 
     // << เปลี่ยนเป็น URL /exec ของคุณ >>
     const SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbyNEU-tFXU6soHg8V9guwnN-5MIulIs4HGMke6THMHO0VeN6vkI8CeC1QQZyDAo9GB6Sw/exec";
+      "https://script.google.com/macros/s/AKfycbzEVhRpXLjQie1ahbHaVn0UcrsUK-z4XPKph5yyoGHLIqpBw4nhMO7P5e3HZVcQh7s/exec";
 
     const fd = new FormData();
     fd.append("name", formData.name);
@@ -232,10 +232,10 @@ function App() {
       const res = await fetch(SCRIPT_URL, { method: "POST", body: fd });
       const data = await res.json(); // { ok:true, row:..., lead_id:"L0xx" }
       if (data.ok) {
-        alert(`ส่งเรียบร้อย! เลขลูกค้า: ${data.lead_id}`);
+        // alert(`ส่งเรียบร้อย! เลขลูกค้า: ${data.lead_id}`);
+        alert("ขอบคุณสำหรับความสนใจ! เราจะติดต่อกลับภายใน 24 ชั่วโมง");
       }
 
-      alert("ขอบคุณสำหรับความสนใจ! เราจะติดต่อกลับภายใน 24 ชั่วโมง");
       setFormData({
         name: "",
         company: "",
