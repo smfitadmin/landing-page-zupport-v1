@@ -182,6 +182,15 @@ function App() {
     e.preventDefault();
     if (submitting) return;
 
+    const phoneDigits = (formData.phone || "").replace(/\D/g, "");
+    if (!/^0\d{8,9}$/.test(phoneDigits)) {
+      setErrors([
+        "กรุณากรอกเบอร์โทรให้ถูกต้อง (ต้องเริ่มด้วย 0 และมี 9–10 หลัก)",
+      ]);
+      alert("กรุณากรอกเบอร์โทรให้ถูกต้อง (ต้องเริ่มด้วย 0 และมี 9–10 หลัก)");
+      return;
+    }
+
     // 1) ตรวจเบื้องต้น
     const pre = precheck(formData);
     if (!pre.shouldInsert) {
@@ -204,7 +213,7 @@ function App() {
 
     // << เปลี่ยนเป็น URL /exec ของคุณ >>
     const SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbzEVhRpXLjQie1ahbHaVn0UcrsUK-z4XPKph5yyoGHLIqpBw4nhMO7P5e3HZVcQh7s/exec";
+      "https://script.google.com/macros/s/AKfycbwCBYzHKa-Z4Obhd8hBG116V0cMRXEXp9Vg1bml_iE3aYJmveEkTXyqm32CypvuieZnlw/exec";
 
     const fd = new FormData();
     fd.append("name", formData.name);
@@ -223,16 +232,9 @@ function App() {
     fd.append("email_disposable", String(pre.emailDisposable));
 
     try {
-      // ใช้ no-cors เพื่อให้ Apps Script รับได้ทุกโดเมน (opaque response)
-      // await fetch(SCRIPT_URL, {
-      //   method: "POST",
-      //   body: fd,
-      //   mode: "no-cors",
-      // });
       const res = await fetch(SCRIPT_URL, { method: "POST", body: fd });
-      const data = await res.json(); // { ok:true, row:..., lead_id:"L0xx" }
+      const data = await res.json();
       if (data.ok) {
-        // alert(`ส่งเรียบร้อย! เลขลูกค้า: ${data.lead_id}`);
         alert("ขอบคุณสำหรับความสนใจ! เราจะติดต่อกลับภายใน 24 ชั่วโมง");
       }
 
@@ -270,7 +272,7 @@ function App() {
                 <br />
                 เป็น<span className="text-green-400">เงินสดทันที</span>
               </h1>
-              <p className="text-xl lg:text-2xl mb-8 text-blue-100 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 lg:mb-8 text-blue-100 leading-relaxed">
                 Supply Chain Financing ที่ช่วยให้ธุรกิจของคุณมีสภาพคล่องดีขึ้น
                 ไม่ต้องรอเงิน ไม่ต้องกู้ดอกเบี้ยสูง
               </p>
@@ -384,7 +386,7 @@ function App() {
                       ประเมินวงเงินสินเชื่อ
                     </h3>
                     <p className="text-gray-600">
-                      เราตรวจสอบเครดิตของลูกค้าและอนุมัติอย่างรวดเร็ว
+                      เราตรวจสอบเครดิตของลูกค้าและอนุมัติวงเงินอย่างรวดเร็ว
                     </p>
                   </div>
                 </div>
@@ -397,7 +399,7 @@ function App() {
                       ทราบผลของวงเงิน
                     </h3>
                     <p className="text-gray-600">
-                      ลูกค้าสามารถเริ่มต้นส่งใบแจ้งหนี้
+                      ลูกค้าสามารถส่งใบแจ้งหนี้
                       เพื่อขอสินเชื่อผ่านระบบได้ทันทีหลังอนุมัติ
                     </p>
                   </div>
@@ -446,7 +448,7 @@ function App() {
                 พร้อมเพิ่มสภาพคล่องให้ธุรกิจแล้วหรือยัง?
               </h2>
               <p className="text-xl text-gray-600">
-                ปรึกษาฟรีกับผู้เชี่ยวชาญ หรือกรอกข้อมูลเพื่อรับ Promotion
+                กรอกข้อมูลและปรึกษาฟรีกับผู้เชี่ยวชาญ
               </p>
             </div>
 
@@ -523,6 +525,9 @@ function App() {
                       <input
                         type="tel"
                         name="phone"
+                        inputMode="numeric"
+                        pattern="^0\d{8,9}$"
+                        maxLength={10}
                         required
                         value={formData.phone}
                         onChange={handleInputChange}
@@ -622,14 +627,12 @@ function App() {
                         <div className="font-semibold text-gray-800">
                           ที่อยู่
                         </div>
-                        <div className="text-gray-600">
+                        <div className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
                           New Paradigm Co., Ltd. (Head Office)
                           <br />
                           252/91, Muang Thai-Phatra Complex Building (Tower B),
-                          16th Floor
-                          <br />
-                          Room 252/91(H), Ratchadaphisek Road, Huaykwang,
-                          Bangkok 10310
+                          16th Floor Room 252/91(H), Ratchadaphisek Road,
+                          Huaykwang, Bangkok 10310
                         </div>
                       </div>
                     </div>
