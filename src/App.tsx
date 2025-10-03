@@ -267,14 +267,16 @@ function App() {
                 alt="Selfmade Finance"
                 className="h-16 mb-8"
               />
-              <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 เปลี่ยน<span className="text-green-400">ใบแจ้งหนี้</span>
                 <br />
                 เป็น<span className="text-green-400">เงินสดทันที</span>
               </h1>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 lg:mb-8 text-blue-100 leading-relaxed">
-                Supply Chain Financing ที่ช่วยให้ธุรกิจของคุณมีสภาพคล่องดีขึ้น
-                ไม่ต้องรอเงิน ไม่ต้องกู้ดอกเบี้ยสูง
+              <p className="text-base sm:text-m md:text-lg lg:text-xl mb-6 lg:mb-8 text-blue-100 leading-relaxed">
+                Supply Chain Financing ที่ช่วยให้ธุรกิจของคุณมีสภาพคล่องดีขึ้น{" "}
+                <span className="inline md:block">
+                  ไม่ต้องรอเงิน ไม่ต้องกู้ดอกเบี้ยสูง
+                </span>
               </p>
               <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
                 <div>
